@@ -79,7 +79,7 @@ Each race calibrates primitive group-operation throughput in the executing brows
 
 Real-size groups appear only in formulas and the key-length table. The inspectable smooth-order and partial-leak fixtures demonstrate weaknesses; they are not production parameters. Elementary index-calculus asymptotics omit the unspecified constant and are not numerical predictions.
 
-Central accent, favicon, category and port confirmation remain pending. Local port 4227 is provisional because the full sibling census was unavailable. The shared catalog is unchanged.
+The Crypto Lab catalog integration records this lab’s concept, level, source evidence and fleet automation. Playwright port 4227 is unique across all 223 registered configurations; strictPort is enforced and existing servers are never reused.
 
 ---
 
