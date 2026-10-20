@@ -47,5 +47,19 @@
     "anchor": "generic=(bits:number)=>bits/2",
     "replacement": "generic=(bits:number)=>bits",
     "test": "measured ladder points"
+  },
+  {
+    "name": "skip rank check",
+    "file": "src/dlog/index/linalg.ts",
+    "anchor": "if(rank!==columns)return",
+    "replacement": "if(rank!==columns && rank<0)return",
+    "test": "index relations"
+  },
+  {
+    "name": "kangaroo invents a trap answer",
+    "file": "src/dlog/generic/kangaroo.ts",
+    "anchor": "return {x:null,reason:'Not found in interval",
+    "replacement": "return {x:a,reason:'Not found in interval",
+    "test": "membership refusal"
   }
 ]

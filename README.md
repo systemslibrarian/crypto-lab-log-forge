@@ -69,7 +69,7 @@ npm run test:mutations
 
 26 local unit tests pass. They cover the three K–L worked examples, all four generic methods in both representations, membership, Hasse-certified curve order, the 128-bit Lucas certificate, PH's measured operation advantage on a prime-power subgroup, ZK Arena's 564522-modulus partial leak, rank deficiency, every collected relation, Euler parity, subgroup lifting, independent verifier isolation and worker decimal serialization. No coverage percentage is claimed.
 
-Eight browser claims independently exponentiate displayed answers, check CRT residues, rederive index relations, verify negative claims, inspect trace controls and assert stale-result retirement. Seven concrete mutations must build, move bundle bytes, fail a previously passing named claim, restore exactly and pass again. Accessibility drives the production build at 1280/320 pixels through success, refusal, intermediate trace and disclosure states using unchanged fleet contrast and non-text oracles.
+Nine browser claims independently exponentiate displayed answers, check CRT residues, rederive index relations, verify negative claims, inspect trace controls and assert stale-result retirement. Nine concrete mutations must build, move bundle bytes, fail a previously passing named claim, restore exactly and pass again. Accessibility drives the production build at 1280/320 pixels through success, refusal, intermediate trace and disclosure states using unchanged fleet contrast and non-text oracles.
 
 Browser verification runs in CI when supported local browser control is unavailable. Pages and grouped Dependabot auto-merge are gated on the full suite. PR checks, manual dispatch, per-ref concurrency and post-merge deployment dispatch are included.
 
