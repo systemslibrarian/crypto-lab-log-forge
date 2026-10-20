@@ -1,0 +1,3 @@
+import {pow} from './modarith';
+// Deterministic for the toy integer fixtures below 2^64 (HAC algorithm, established seven-base bound).
+export function prime(n:bigint):boolean{if(n<2n)return false;for(const p of [2n,3n,5n,7n,11n,13n,17n,19n,23n,29n,31n,37n]){if(n%p===0n)return n===p;}if(n>=1n<<64n)throw Error('Use a supplied certificate for larger fixtures');let d=n-1n,s=0;while(d%2n===0n){d/=2n;s++;}for(const a of [2n,325n,9375n,28178n,450775n,9780504n,1795265022n]){if(a%n===0n)continue;let x=pow(a,d,n);if(x===1n||x===n-1n)continue;let passed=false;for(let j=1;j<s;j++){x=x*x%n;if(x===n-1n){passed=true;break;}}if(!passed)return false;}return true;}

@@ -1,0 +1,2 @@
+import type {Group,Answer} from '../../group/types';
+export function brute<T>(G:Group<T>,g:T,h:T):Answer{let y=G.identity;const trace:Record<string,string>[]=[];for(let x=0n;x<G.order;x++){if(trace.length<32)trace.push({exponent:String(x),element:G.encode(y)});if(G.equals(y,h))return {x,reason:'Matched a successive power',memory:1,trace};y=G.op(y,g);}return {x:null,reason:'No power matched',memory:1,trace};}

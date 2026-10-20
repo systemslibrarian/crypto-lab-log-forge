@@ -1,0 +1,51 @@
+[
+  {
+    "name": "verifier off-by-one",
+    "file": "src/verify/verify.ts",
+    "anchor": "power(s.g,x)===s.h",
+    "replacement": "power(s.g,x+1n)===s.h",
+    "test": "race solutions"
+  },
+  {
+    "name": "wrong CRT inverse modulus",
+    "file": "src/nt/modarith.ts",
+    "anchor": "inverse(M,modulus)",
+    "replacement": "inverse(M,modulus+1n)",
+    "test": "PH residues CRT"
+  },
+  {
+    "name": "rho rejects usable congruence",
+    "file": "src/dlog/generic/rho.ts",
+    "anchor": "if(c===0n){",
+    "replacement": "if(c===0n||c!==0n){",
+    "test": "rho recovers"
+  },
+  {
+    "name": "wrong Euler parity",
+    "file": "src/dlog/index/calculus.ts",
+    "anchor": "G.pow(base[i],q)===1n?0n:1n",
+    "replacement": "G.pow(base[i],q)===1n?1n:0n",
+    "test": "index relations"
+  },
+  {
+    "name": "large-modulus negative removed",
+    "file": "src/main.ts",
+    "anchor": "A large modulus does not make the discrete log hard when its group order is smooth.",
+    "replacement": "A large modulus makes the discrete log hard.",
+    "test": "PH residues CRT"
+  },
+  {
+    "name": "prime-order negative removed",
+    "file": "src/main.ts",
+    "anchor": "Prime order alone does not make a finite-field group secure.",
+    "replacement": "Prime order alone makes a finite-field group secure.",
+    "test": "prime order negative"
+  },
+  {
+    "name": "wrong generic scale",
+    "file": "src/main.ts",
+    "anchor": "generic=(bits:number)=>bits/2",
+    "replacement": "generic=(bits:number)=>bits",
+    "test": "measured ladder points"
+  }
+]

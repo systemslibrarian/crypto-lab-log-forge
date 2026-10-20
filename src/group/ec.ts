@@ -1,0 +1,5 @@
+import type {Group} from './types';import {mod,inverse} from '../nt/modarith';
+export type Point={x:bigint;y:bigint}|null;export type Curve={p:bigint;a:bigint;b:bigint;q:bigint;G:Point};
+export function onCurve(P:Point,c:Curve):boolean{return P===null||(P.x>=0n&&P.x<c.p&&P.y>=0n&&P.y<c.p&&mod(P.y*P.y-P.x**3n-c.a*P.x-c.b,c.p)===0n);}
+export function elliptic(c:Curve):Group<Point>{const op=(P:Point,Q:Point):Point=>{if(!P)return Q;if(!Q)return P;if(P.x===Q.x&&mod(P.y+Q.y,c.p)===0n)return null;const m=P.x===Q.x?mod((3n*P.x*P.x+c.a)*inverse(2n*P.y,c.p),c.p):mod((Q.y-P.y)*inverse(Q.x-P.x,c.p),c.p),x=mod(m*m-P.x-Q.x,c.p);return {x,y:mod(m*(P.x-x)-P.y,c.p)};};const neg=(P:Point):Point=>P?{x:P.x,y:mod(-P.y,c.p)}:null;const pow=(P:Point,e:bigint):Point=>{if(e<0n){P=neg(P);e=-e;}let R:Point=null;while(e){if(e&1n)R=op(R,P);P=op(P,P);e>>=1n;}return R;};return {identity:null,order:c.q,op,inverse:neg,pow,equals:(P,Q)=>P===null?Q===null:Q!==null&&P.x===Q.x&&P.y===Q.y,encode:P=>P?P.x+','+P.y:'O'};}
+// [extension] point: MOV and anomalous-curve attacks need different curve choices and algorithms.
