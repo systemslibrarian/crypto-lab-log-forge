@@ -25,3 +25,11 @@ it('Cheon recovers a fresh hidden exponent for every offered divisor',()=>{const
 it('Cheon has no oracle or secret import',()=>{const source=readFileSync('src/dlog/aux/cheon.ts','utf8');expect(source).not.toMatch(/oracle|static\.ts|secret/i);expect(source.match(/import[^;]+;/g)).toEqual(["import type {Group} from '../../group/types';","import {inverse,pow,sqrt} from '../../nt/modarith';"]);});
 it('real-group q plus/minus factorizations multiply back and every factor passes fixed-base Miller–Rabin',()=>{for(const order of realOrders){expect(()=>validateRealOrder(order)).not.toThrow();expect(factorProduct(order.minusFactors)).toBe(order.order-1n);expect(factorProduct(order.plusFactors)).toBe(order.order+1n);for(const side of [order.minusFactors,order.plusFactors])for(const factor of side)expect(fixedBaseMillerRabin(factor.prime)).toBe(true);}});
 it('real-group query-budget statements are recomputed from factors',()=>{const [curve,p256,secp]=realOrders;expect(bestDivisor(curve.minusFactors,1n<<58n)).toBe(132n);expect(bestDivisor(curve.plusFactors,1n<<58n)).toBe(7210n);const p256d=bestDivisor(p256.minusFactors,1n<<32n);expect(log2BigInt(p256d)).toBeGreaterThanOrEqual(31.9);expect(p256d).toBeLessThanOrEqual(1n<<32n);expect(bestDivisor(secp.minusFactors,1n<<25n)).toBe(18051648n);expect(bestDivisor(secp.plusFactors,1n<<46n)).toBe(50340689170382n);});
+it('failed first Cheon search reports only the table actually built',()=>{
+ const G=multiplicative(47n,23n),r=cheon(G,4n,pow(4n,3n,47n),pow(4n,5n,47n),5n,2n);
+ expect(r.alpha).toBeNull();expect(r.step1.tableSize).toBe(4);expect(r.step2.tableSize).toBe(0);expect(r.tableEntries).toBe(4);
+});
+it('out-of-range oracle queries do not charge exponentiations that never ran',()=>{
+ const oracle=createStaticOracle(multiplicative(47n,23n),47n,4n,3n);
+ expect(()=>oracle.answer(0n)).toThrow('Membership refused');expect(oracle.queryCount).toBe(1);expect(oracle.validationChecks).toBe(1);expect(oracle.oracleOperations).toBe(0);
+});

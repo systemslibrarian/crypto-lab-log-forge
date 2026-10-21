@@ -10,7 +10,7 @@ export function createStaticOracle(raw:Group<bigint>,p:bigint,g:bigint,secret:bi
  if(secret<=0n||secret>=raw.order)throw Error('The static exponent must be in [1, q − 1]');
  let queries=0,checks=0,work=0;
  const publicKey=raw.pow(g,secret);
- return {publicKey,get queryCount(){return queries;},get validationChecks(){return checks;},get oracleOperations(){return work;},answer(v:bigint){queries++;checks++;work+=exponentiationCost(raw.order);if(!member(v,p,raw.order))throw Error('Membership refused: oracle input is outside the order-q subgroup');work+=exponentiationCost(secret);return raw.pow(v,secret);}};
+ return {publicKey,get queryCount(){return queries;},get validationChecks(){return checks;},get oracleOperations(){return work;},answer(v:bigint){queries++;checks++;if(v>0n&&v<p)work+=exponentiationCost(raw.order);if(!member(v,p,raw.order))throw Error('Membership refused: oracle input is outside the order-q subgroup');work+=exponentiationCost(secret);return raw.pow(v,secret);}};
 }
 
 // Kept in the oracle module: the attacker receives the public key and answers,

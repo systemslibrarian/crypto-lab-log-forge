@@ -88,3 +88,13 @@ The Crypto Lab catalog integration records this lab’s concept, level, source e
 *One of the browser demos in the [Crypto Lab](https://crypto-lab.systemslibrarian.dev/) suite.*
 
 *"So whether you eat or drink or whatever you do, do it all for the glory of God." — 1 Corinthians 10:31*
+
+### Static-DH correction
+
+A failed first Cheon search reports only the table it actually built. Out-of-range
+oracle inputs still count as queries and validation checks, but do not charge a
+membership exponentiation that was skipped. The page now distinguishes its fixed
+raw-answer oracle from TLS: RFC 8446 §§7.1 and 7.4 feed the DH secret into HKDF;
+key reuse alone does not expose this oracle. RFC 9497 §7.2.3 supplies the OPRF
+connection. Mutation replay requires the owning assertion in a structured report;
+crashes, skipped tests, and setup failures cannot count as kills.
