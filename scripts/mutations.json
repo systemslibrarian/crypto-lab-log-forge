@@ -61,5 +61,40 @@
     "anchor": "return {x:null,reason:'Not found in interval",
     "replacement": "return {x:a,reason:'Not found in interval",
     "test": "membership refusal"
+  },
+  {
+    "name": "Cheon xi uses d plus one",
+    "file": "src/dlog/aux/cheon.ts",
+    "anchor": "const xi=pow(zeta,d,q);",
+    "replacement": "const xi=pow(zeta,d+1n,q);",
+    "test": "static Cheon chain"
+  },
+  {
+    "name": "Cheon drops the residue stride",
+    "file": "src/dlog/aux/cheon.ts",
+    "anchor": "const alpha=pow(zeta,u+v*r,q);",
+    "replacement": "const alpha=pow(zeta,u+v,q);",
+    "test": "static Cheon chain"
+  },
+  {
+    "name": "static oracle exponent off by one",
+    "file": "src/oracle/static.ts",
+    "anchor": "return raw.pow(v,secret);",
+    "replacement": "return raw.pow(v,secret+1n);",
+    "test": "static Cheon chain"
+  },
+  {
+    "name": "Cheon accepts a non-divisor",
+    "file": "src/dlog/aux/cheon.ts",
+    "anchor": "if(d<2n||(q-1n)%d!==0n)",
+    "replacement": "if(d<2n||q<0n)",
+    "test": "static oracle refuses non-divisor"
+  },
+  {
+    "name": "q minus one row silently uses q plus one",
+    "file": "src/ui/static.ts",
+    "anchor": "bestDivisor(group.minusFactors,limit)",
+    "replacement": "bestDivisor(group.plusFactors,limit)",
+    "test": "real-group divisor rows"
   }
 ]
