@@ -98,3 +98,6 @@ raw-answer oracle from TLS: RFC 8446 §§7.1 and 7.4 feed the DH secret into HKD
 key reuse alone does not expose this oracle. RFC 9497 §7.2.3 supplies the OPRF
 connection. Mutation replay requires the owning assertion in a structured report;
 crashes, skipped tests, and setup failures cannot count as kills.
+
+Cancellation in degraded mode is checked before computation starts and on every
+progress update or error, so a retired run cannot replace a newer result.
