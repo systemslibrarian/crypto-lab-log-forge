@@ -24,5 +24,5 @@ test('raw static-DH oracle scope distinguishes the fixture from TLS',async({page
  await boot(page);await page.getByRole('tab',{name:/Static DH oracle/}).click();
  await expect(page.locator('[data-static-protocol-scope]')).toContainText('TLS key reuse alone does not expose this raw-answer oracle');
  await expect(page.locator('[data-static-protocol-scope]')).toContainText('fixed teaching key');
- await expect(page.locator('[data-static-protocol-scope] a')).toHaveAttribute('href',/rfc8446#section-7.1/);
+ await expect(page.locator('[data-static-protocol-scope] a')).toHaveAttribute('href',/rfc9846#section-7.1/);
 });

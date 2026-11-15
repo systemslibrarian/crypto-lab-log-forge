@@ -94,10 +94,16 @@ The Crypto Lab catalog integration records this lab’s concept, level, source e
 A failed first Cheon search reports only the table it actually built. Out-of-range
 oracle inputs still count as queries and validation checks, but do not charge a
 membership exponentiation that was skipped. The page now distinguishes its fixed
-raw-answer oracle from TLS: RFC 8446 §§7.1 and 7.4 feed the DH secret into HKDF;
+raw-answer oracle from TLS: RFC 9846 §§7.1 and 7.4 feed the DH secret into HKDF;
 key reuse alone does not expose this oracle. RFC 9497 §7.2.3 supplies the OPRF
 connection. Mutation replay requires the owning assertion in a structured report;
 crashes, skipped tests, and setup failures cannot count as kills.
 
 Cancellation in degraded mode is checked before computation starts and on every
 progress update or error, so a retired run cannot replace a newer result.
+
+**Standards reviewed 15 November 2026:** RFC 8446 (TLS 1.3) was obsoleted by
+[RFC 9846](https://www.rfc-editor.org/info/rfc9846) in July 2026. The key-schedule citation
+above and on the page now points to RFC 9846 §7.1 (Key Schedule) and §7.4 (Asymmetric Shared
+Secret Calculation, formerly "(EC)DHE Shared Secret Calculation"), which keep RFC 8446's
+section numbers.
