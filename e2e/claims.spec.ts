@@ -26,3 +26,21 @@ test('raw static-DH oracle scope distinguishes the fixture from TLS',async({page
  await expect(page.locator('[data-static-protocol-scope]')).toContainText('fixed teaching key');
  await expect(page.locator('[data-static-protocol-scope] a')).toHaveAttribute('href',/rfc9846#section-7.1/);
 });
+
+test('the key-length table identifies the quantity each column measures', async ({ page }) => {
+  await boot(page);
+  await page.getByRole('tab', { name: /Cost and key lengths/ }).click();
+  const table = page.getByRole('region', { name: 'NIST SP 800-57 Part 1 Rev 5 Table 2' });
+  await expect(table.getByRole('columnheader')).toHaveText([
+    'Security bits', 'Finite-field p bits', 'Subgroup q bits', 'ECC base-point order bits',
+  ]);
+  const rows = await table.locator('tbody tr').evaluateAll((elements) =>
+    elements.map((row) => Array.from(row.querySelectorAll('td'), (cell) => cell.textContent)),
+  );
+  expect(rows).toEqual([
+    ['112', '2048', '224', '224–255'],
+    ['128', '3072', '256', '256–383'],
+    ['192', '7680', '384', '384–511'],
+    ['256', '15360', '512', '512 and above'],
+  ]);
+});
